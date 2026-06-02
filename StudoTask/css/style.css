@@ -1,0 +1,567 @@
+:root{
+    --primary:#796042;
+    --white:#FFFFFF;
+    --shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    background:var(--white);
+    color:var(--primary);
+    min-height:100vh;
+}
+
+.container{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+}
+
+.card{
+    width:100%;
+    max-width:420px;
+    background:white;
+    padding:40px;
+    border-radius:20px;
+    box-shadow:var(--shadow);
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:10px;
+    font-size:2.5rem;
+    font-weight:bold;
+}
+
+.subtitle{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    border:2px solid #ddd;
+    border-radius:10px;
+    outline:none;
+}
+
+input:focus{
+    border-color:var(--primary);
+}
+
+.btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:var(--primary);
+    color:white;
+    font-size:1rem;
+}
+
+.btn:hover{
+    opacity:.9;
+}
+
+.btn-secondary{
+    background:white;
+    color:var(--primary);
+    border:2px solid var(--primary);
+}
+
+.button-group{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.link{
+    text-align:center;
+    margin-top:20px;
+}
+
+a{
+    text-decoration:none;
+    color:var(--primary);
+    font-weight:bold;
+}
+
+.dashboard{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+.dashboard h1{
+    font-size:4rem;
+    margin-bottom:10px;
+}
+
+.dashboard p{
+    margin-bottom:40px;
+}
+
+.dashboard-buttons{
+    display:flex;
+    gap:20px;
+}
+
+.dashboard-buttons button{
+    width:180px;
+}
+
+@media(max-width:768px){
+
+    .dashboard h1{
+        font-size:2.5rem;
+    }
+
+    .dashboard-buttons{
+        flex-direction:column;
+    }
+
+}
+.page-container{
+
+    padding:40px;
+
+}
+
+.page-title{
+
+    color:#796042;
+    margin-bottom:30px;
+
+}
+
+.toolbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+
+}
+
+.add-btn{
+
+    width:60px;
+    height:60px;
+    border:none;
+    border-radius:50%;
+    background:#796042;
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+
+}
+
+.task-table{
+
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+
+}
+
+.task-table th{
+
+    background:#796042;
+    color:white;
+
+}
+
+.task-table th,
+.task-table td{
+
+    border:1px solid #ddd;
+    padding:15px;
+    text-align:center;
+
+}
+
+.dashboard-float{
+
+    position:fixed;
+    bottom:20px;
+    right:20px;
+
+    background:#796042;
+    color:white;
+
+    border:none;
+
+    padding:15px 25px;
+
+    border-radius:15px;
+
+    cursor:pointer;
+
+    box-shadow:0 5px 10px rgba(0,0,0,.2);
+
+}
+
+.tag{
+
+    padding:8px 15px;
+
+    border-radius:15px;
+
+    color:white;
+
+    font-size:14px;
+
+}
+
+.low{
+
+    background:#27ae60;
+
+}
+
+.medium{
+
+    background:#f39c12;
+
+}
+
+.high{
+
+    background:#e74c3c;
+
+}
+.todo-form{
+
+    display:grid;
+
+    gap:15px;
+
+    margin-bottom:30px;
+
+}
+
+.todo-form input,
+.todo-form textarea,
+.todo-form select{
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+}
+
+.todo-form textarea{
+
+    height:120px;
+
+    resize:none;
+
+}
+
+.action-btn{
+
+    border:none;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    margin:2px;
+
+}
+
+.edit-btn{
+
+    background:#f39c12;
+
+    color:white;
+
+}
+
+.delete-btn{
+
+    background:#e74c3c;
+
+    color:white;
+
+}
+
+.completed{
+
+    opacity:.5;
+
+    text-decoration:line-through;
+
+}
+.calendar-header{
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:30px;
+
+    margin-bottom:25px;
+
+}
+
+.calendar-header button{
+
+    background:#796042;
+    color:white;
+    border:none;
+
+    padding:10px 15px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+.calendar-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(7,1fr);
+
+    gap:5px;
+
+}
+
+.day-name{
+
+    background:#796042;
+
+    color:white;
+
+    text-align:center;
+
+    padding:12px;
+
+    border-radius:8px;
+
+}
+
+.calendar-day{
+
+    min-height:90px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    padding:10px;
+
+    cursor:pointer;
+
+    background:white;
+
+}
+
+.calendar-day:hover{
+
+    border-color:#796042;
+
+}
+
+.day-number{
+
+    font-weight:bold;
+
+}
+
+.deadline-tag{
+
+    margin-top:5px;
+
+    font-size:11px;
+
+    padding:4px;
+
+    border-radius:5px;
+
+    color:white;
+
+}
+
+.task-details{
+
+    margin-top:40px;
+
+    background:white;
+
+    border:1px solid #ddd;
+
+    padding:20px;
+
+    border-radius:15px;
+
+}
+
+.high-color{
+
+    background:#e74c3c;
+
+}
+
+.medium-color{
+
+    background:#f39c12;
+
+}
+
+.low-color{
+
+    background:#27ae60;
+
+}
+
+@media(max-width:768px){
+
+    .calendar-day{
+
+        min-height:70px;
+
+        font-size:12px;
+
+    }
+
+}
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(200px,1fr));
+
+    gap:20px;
+
+    margin-bottom:40px;
+
+}
+
+.stat-card{
+
+    background:white;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    text-align:center;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+
+}
+
+.stat-card h2{
+
+    color:#796042;
+
+    font-size:40px;
+
+}
+
+.progress-section{
+
+    margin-bottom:40px;
+
+}
+
+.progress-bar{
+
+    width:100%;
+
+    height:30px;
+
+    background:#ddd;
+
+    border-radius:20px;
+
+    overflow:hidden;
+
+}
+
+.progress-fill{
+
+    height:100%;
+
+    width:0%;
+
+    background:#796042;
+
+    transition:.3s;
+
+}
+
+.feature-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:20px;
+
+}
+
+.feature-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+
+}
+
+.feature-card h3{
+
+    margin-bottom:10px;
+
+}
+.welcome-card{
+
+    margin-bottom:40px;
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.1);
+
+    max-width:500px;
+
+}

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Calendar</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="page-container">
+
+    <h1 class="page-title">
+        Academic Calendar
+    </h1>
+
+    <div class="calendar-header">
+
+        <button id="prevMonth">
+            ◀
+        </button>
+
+        <h2 id="monthYear">
+
+        </h2>
+
+        <button id="nextMonth">
+            ▶
+        </button>
+
+    </div>
+
+    <div class="calendar-grid">
+
+        <div class="day-name">Sun</div>
+        <div class="day-name">Mon</div>
+        <div class="day-name">Tue</div>
+        <div class="day-name">Wed</div>
+        <div class="day-name">Thu</div>
+        <div class="day-name">Fri</div>
+        <div class="day-name">Sat</div>
+
+    </div>
+
+    <div
+        id="calendar"
+        class="calendar-grid">
+
+    </div>
+
+    <div
+        id="taskDetails"
+        class="task-details">
+
+        <h3>
+            Selected Date
+        </h3>
+
+        <div id="detailContent">
+
+            Click a date
+
+        </div>
+
+    </div>
+
+</div>
+
+<button
+    class="dashboard-float"
+    onclick="location.href='dashboard.html'">
+
+    Dashboard
+
+</button>
+
+<script src="js/calendar.js"></script>
+
+</body>
+
+</html>
