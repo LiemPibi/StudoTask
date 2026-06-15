@@ -1,138 +1,69 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>To-Do List</title>
-
-    <link
-        rel="stylesheet"
-        href="css/style.css">
-
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
 
 <div class="page-container">
 
-    <h1 class="page-title">
-        To-Do List
-    </h1>
+    <h1 class="page-title">To-Do List</h1>
 
-    <div class="todo-form">
+    <form id="taskForm" class="todo-form" onsubmit="event.preventDefault(); saveTask();">
+        <input type="hidden" id="taskId">
+        <input type="text" id="title" placeholder="Title" required>
+        <textarea id="description" placeholder="Description"></textarea>
+        <input type="url" id="link" placeholder="Task Link">
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate">
+        <label for="deadline">Deadline</label>
+        <input type="date" id="deadline" required>
+        <label for="finishDate">Finish Date</label>
+        <input type="date" id="finishDate">
 
-        <input
-            type="hidden"
-            id="taskId">
-
-        <input
-            type="text"
-            id="title"
-            placeholder="Title">
-
-        <textarea
-            id="description"
-            placeholder="Description"></textarea>
-
-        <input
-            type="url"
-            id="link"
-            placeholder="Task Link">
-
-        <input
-            type="date"
-            id="startDate">
-
-        <input
-            type="date"
-            id="deadline">
-
-        <input
-            type="date"
-            id="finishDate">
-
-        <select id="urgency">
-
-            <option value="High">
-                High
-            </option>
-
-            <option value="Medium">
-                Medium
-            </option>
-
-            <option value="Low">
-                Low
-            </option>
-
+        <select id="urgency" aria-label="Urgency level">
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
         </select>
 
-        <button
-            class="btn"
-            onclick="saveTask()">
-
-            Save Task
-
-        </button>
-
-    </div>
+        <button class="btn" type="submit">Save Task</button>
+    </form>
 
     <hr>
 
     <div class="toolbar">
-
-        <select id="sortTodo">
-
-            <option value="title">
-                Sort Title
-            </option>
-
-            <option value="deadline">
-                Sort Deadline
-            </option>
-
-            <option value="urgency">
-                Sort Urgency
-            </option>
-
+        <select id="sortTodo" aria-label="Sort to-do list">
+            <option value="title">Sort Title</option>
+            <option value="deadline">Sort Deadline</option>
+            <option value="urgency">Sort Urgency</option>
         </select>
-
     </div>
 
-    <table class="task-table">
-
-        <thead>
-
-        <tr>
-
-            <th>Done</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Deadline</th>
-            <th>Urgency</th>
-            <th>Action</th>
-
-        </tr>
-
-        </thead>
-
-        <tbody id="todoBody">
-
-        </tbody>
-
-    </table>
+    <div class="table-wrapper">
+        <table class="task-table">
+            <thead>
+                <tr>
+                    <th>Done</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Deadline</th>
+                    <th>Urgency</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody id="todoBody"></tbody>
+        </table>
+    </div>
 
 </div>
 
-<button
-    class="dashboard-float"
-    onclick="location.href='dashboard.html'">
-
-    Dashboard
-
-</button>
+<button class="dashboard-float" onclick="location.href='dashboard.html'">Dashboard</button>
 
 <script src="js/todolist.js"></script>
-
 </body>
 </html>

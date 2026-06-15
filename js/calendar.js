@@ -1,270 +1,101 @@
-const calendar =
-document.getElementById(
-    "calendar"
-);
+const calendar = document.getElementById("calendar");
+const monthYear = document.getElementById("monthYear");
+const detailContent = document.getElementById("detailContent");
+const prevMonthButton = document.getElementById("prevMonth");
+const nextMonthButton = document.getElementById("nextMonth");
 
-const monthYear =
-document.getElementById(
-    "monthYear"
-);
+let currentDate = new Date();
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
 
-const detailContent =
-document.getElementById(
-    "detailContent"
-);
+function escapeHTML(value) {
+    return String(value || "").replace(/[&<>'"]/g, character => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        '"': "&quot;"
+    }[character]));
+}
 
-let currentDate =
-new Date();
+function formatDate(year, month, day) {
+    return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+}
 
-let tasks =
-JSON.parse(
-    localStorage.getItem(
-        "tasks"
-    )
-) || [];
-
-function renderCalendar(){
-
+function renderCalendar() {
     calendar.innerHTML = "";
 
-    const year =
-    currentDate.getFullYear();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
 
-    const month =
-    currentDate.getMonth();
+    monthYear.innerText = currentDate.toLocaleString("default", {
+        month: "long",
+        year: "numeric"
+    });
 
-    monthYear.innerText =
+    const firstDay = new Date(year, month, 1).getDay();
+    const lastDate = new Date(year, month + 1, 0).getDate();
 
-    currentDate.toLocaleString(
-        "default",
-        {
-            month:"long",
-            year:"numeric"
-        }
-    );
-
-    const firstDay =
-    new Date(
-        year,
-        month,
-        1
-    ).getDay();
-
-    const lastDate =
-    new Date(
-        year,
-        month + 1,
-        0
-    ).getDate();
-
-    for(
-        let i=0;
-        i<firstDay;
-        i++
-    ){
-
-        const empty =
-        document.createElement(
-            "div"
-        );
-
-        calendar.appendChild(
-            empty
-        );
-
+    for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement("div");
+        empty.className = "calendar-empty";
+        calendar.appendChild(empty);
     }
 
-    for(
-        let day=1;
-        day<=lastDate;
-        day++
-    ){
+    for (let day = 1; day <= lastDate; day++) {
+        const cell = document.createElement("button");
+        const dateString = formatDate(year, month, day);
+        const taskList = tasks.filter(task => task.deadline === dateString);
 
-        const cell =
-        document.createElement(
-            "div"
-        );
+        cell.type = "button";
+        cell.className = "calendar-day";
+        cell.innerHTML = `<div class="day-number">${day}</div>`;
 
-        cell.className =
-        "calendar-day";
+        taskList.forEach(task => {
+            const taskTag = document.createElement("div");
+            taskTag.className = `deadline-tag ${task.urgency.toLowerCase()}-color`;
+            taskTag.innerText = task.title;
+            cell.appendChild(taskTag);
+        });
 
-        const dateString =
-
-        `${year}-${
-            String(
-                month+1
-            ).padStart(
-                2,
-                "0"
-            )
-        }-${
-            String(
-                day
-            ).padStart(
-                2,
-                "0"
-            )
-        }`;
-
-        let html =
-
-        `<div class="day-number">
-            ${day}
-        </div>`;
-
-        const taskList =
-
-        tasks.filter(
-            task =>
-            task.deadline ===
-            dateString
-        );
-
-        taskList.forEach(
-            task=>{
-
-                html +=
-
-                `<div class=
-                "deadline-tag
-                ${task.urgency.toLowerCase()}-color">
-
-                ${task.title}
-
-                </div>`;
-
-            }
-        );
-
-        cell.innerHTML = html;
-
-        cell.addEventListener(
-            "click",
-            ()=>{
-
-                showDetails(
-                    dateString
-                );
-
-            }
-        );
-
-        calendar.appendChild(
-            cell
-        );
-
+        cell.addEventListener("click", () => showDetails(dateString));
+        calendar.appendChild(cell);
     }
-
 }
 
-function showDetails(date){
+function showDetails(date) {
+    const dateTasks = tasks.filter(task => task.deadline === date);
 
-    const dateTasks =
-
-    tasks.filter(
-        task =>
-        task.deadline === date
-    );
-
-    if(
-        dateTasks.length === 0
-    ){
-
-        detailContent.innerHTML =
-
-        `
-        <p>
-            No task on ${date}
-        </p>
-        `;
-
+    if (dateTasks.length === 0) {
+        detailContent.innerHTML = `<p>No task on ${escapeHTML(date)}</p>`;
         return;
-
     }
 
-    let html = "";
+    detailContent.innerHTML = dateTasks.map(task => {
+        const linkMarkup = task.link
+            ? `<a href="${escapeHTML(task.link)}" target="_blank" rel="noopener noreferrer">Open Link</a>`
+            : "";
 
-    dateTasks.forEach(
-        task=>{
-
-            html +=
-
-            `
-            <div
-            style="
-            margin-bottom:15px">
-
-            <h4>
-            ${task.title}
-            </h4>
-
-            <p>
-            ${task.description}
-            </p>
-
-            <p>
-            Deadline:
-            ${task.deadline}
-            </p>
-
-            <p>
-            Urgency:
-            ${task.urgency}
-            </p>
-
-            <a
-            href="${task.link}"
-            target="_blank">
-
-            Open Link
-
-            </a>
-
+        return `
+            <div class="task-detail-card">
+                <h4>${escapeHTML(task.title)}</h4>
+                <p>${escapeHTML(task.description)}</p>
+                <p>Deadline: ${escapeHTML(task.deadline)}</p>
+                <p>Urgency: ${escapeHTML(task.urgency)}</p>
+                <p>Status: ${task.completed ? "Completed" : "Pending"}</p>
+                ${linkMarkup}
             </div>
-            `;
-
-        }
-    );
-
-    detailContent.innerHTML =
-    html;
-
+        `;
+    }).join("");
 }
 
-document
-.getElementById(
-    "prevMonth"
-)
-.addEventListener(
-    "click",
-    ()=>{
+prevMonthButton.addEventListener("click", () => {
+    currentDate.setMonth(currentDate.getMonth() - 1);
+    renderCalendar();
+});
 
-        currentDate.setMonth(
-            currentDate.getMonth()
-            -1
-        );
-
-        renderCalendar();
-
-    }
-);
-
-document
-.getElementById(
-    "nextMonth"
-)
-.addEventListener(
-    "click",
-    ()=>{
-
-        currentDate.setMonth(
-            currentDate.getMonth()
-            +1
-        );
-
-        renderCalendar();
-
-    }
-);
+nextMonthButton.addEventListener("click", () => {
+    currentDate.setMonth(currentDate.getMonth() + 1);
+    renderCalendar();
+});
 
 renderCalendar();

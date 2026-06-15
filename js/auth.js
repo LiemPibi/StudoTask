@@ -1,96 +1,77 @@
-// SIGN IN
-
-const signupForm =
-document.getElementById("signupForm");
-
-if(signupForm){
-
-    signupForm.addEventListener(
-        "submit",
-        function(e){
-
-            e.preventDefault();
-
-            const username =
-            document.getElementById(
-                "signupUsername"
-            ).value;
-
-            const password =
-            document.getElementById(
-                "signupPassword"
-            ).value;
-
-            const user = {
-                username,
-                password
-            };
-
-            localStorage.setItem(
-                "studoUser",
-                JSON.stringify(user)
-            );
-
-            alert(
-                "Account created successfully!"
-            );
-
-            location.href =
-            "login.html";
-        }
-    );
+function getUsers() {
+    return JSON.parse(localStorage.getItem("studoUsers")) || [];
 }
 
-// LOGIN
+function saveUsers(users) {
+    localStorage.setItem("studoUsers", JSON.stringify(users));
+}
 
-const loginForm =
-document.getElementById("loginForm");
+function migrateSingleUser() {
+    const legacyUser = JSON.parse(localStorage.getItem("studoUser"));
+    const users = getUsers();
 
-if(loginForm){
+    if (legacyUser && legacyUser.username && !users.some(user => user.username === legacyUser.username)) {
+        users.push(legacyUser);
+        saveUsers(users);
+    }
+}
 
-    loginForm.addEventListener(
-        "submit",
-        function(e){
+function setCurrentUser(user) {
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    localStorage.setItem("studoUser", JSON.stringify(user));
+}
 
-            e.preventDefault();
+migrateSingleUser();
 
-            const username =
-            document.getElementById(
-                "loginUsername"
-            ).value;
+const signupForm = document.getElementById("signupForm");
 
-            const password =
-            document.getElementById(
-                "loginPassword"
-            ).value;
+if (signupForm) {
+    signupForm.addEventListener("submit", function (e) {
+        e.preventDefault();
 
-            const user =
-            JSON.parse(
-                localStorage.getItem(
-                    "studoUser"
-                )
-            );
+        const username = document.getElementById("signupUsername").value.trim();
+        const password = document.getElementById("signupPassword").value.trim();
+        const users = getUsers();
 
-            if(
-                user &&
-                user.username === username &&
-                user.password === password
-        ){
-
-            localStorage.setItem(
-                "currentUser",
-                JSON.stringify(user)
-            );
-
-            location.href =
-            "dashboard.html";
-
-            }else{
-
-                alert(
-                    "Username or Password Wrong"
-                );
-            }
+        if (users.some(user => user.username === username)) {
+            alert("Account already exists. Please log in.");
+            return;
         }
-    );
+
+        const user = {
+            username,
+            password
+        };
+
+        users.push(user);
+        saveUsers(users);
+        setCurrentUser(user);
+
+        alert("Account created successfully!");
+        location.href = "dashboard.html";
+    });
+}
+
+const loginForm = document.getElementById("loginForm");
+
+if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const username = document.getElementById("loginUsername").value.trim();
+        const password = document.getElementById("loginPassword").value.trim();
+        const users = getUsers();
+
+        const user = users.find(
+            item => item.username === username && item.password === password
+        );
+
+        if (user) {
+            setCurrentUser(user);
+            location.href = "dashboard.html";
+            return;
+        }
+
+        alert("Username or password is wrong.");
+    });
 }

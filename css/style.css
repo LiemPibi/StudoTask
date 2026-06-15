@@ -565,3 +565,100 @@ a{
     max-width:500px;
 
 }
+
+.dashboard{
+    padding:40px 20px;
+}
+
+.dashboard-stats,
+.dashboard-progress{
+    width:min(900px,100%);
+}
+
+.dashboard-progress{
+    max-width:700px;
+}
+
+.dashboard-buttons{
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+select,
+textarea,
+button{
+    font:inherit;
+}
+
+select{
+    padding:12px;
+    border:1px solid #ddd;
+    border-radius:10px;
+    color:var(--primary);
+    background:white;
+}
+
+.calendar-day{
+    color:var(--primary);
+    text-align:left;
+    font:inherit;
+}
+
+.calendar-empty{
+    min-height:90px;
+}
+
+.task-detail-card{
+    margin-bottom:15px;
+    padding-bottom:15px;
+    border-bottom:1px solid #eee;
+}
+
+.task-detail-card:last-child{
+    border-bottom:none;
+}
+
+@media(max-width:768px){
+    .page-container{
+        padding:24px 16px 90px;
+    }
+
+    .toolbar{
+        align-items:stretch;
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .add-btn{
+        width:100%;
+        height:48px;
+        border-radius:10px;
+    }
+
+    .task-table{
+        min-width:760px;
+    }
+
+    .dashboard{
+        justify-content:flex-start;
+    }
+
+    .dashboard-buttons,
+    .dashboard-buttons button{
+        width:100%;
+    }
+
+    .calendar-grid{
+        gap:3px;
+    }
+
+    .deadline-tag{
+        font-size:10px;
+        word-break:break-word;
+    }
+}
