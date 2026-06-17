@@ -77,8 +77,10 @@ if(loginForm){
                 user.password === password
         ){
 
+            // BUG FIX: was saving to "currentUser" but dashboard.js
+            // reads "studoUser", so welcome name never appeared.
             localStorage.setItem(
-                "currentUser",
+                "studoUser",
                 JSON.stringify(user)
             );
 

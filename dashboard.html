@@ -5,116 +5,101 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-    
-    <body onload="loadDashboard()">
-    </body>
+<!-- BUG FIX: was two <body> tags; merged into one with onload -->
+<body onload="loadDashboard()">
 
 <div class="dashboard">
 
     <h1>StudoTask</h1>
-<div class="welcome-card">
 
-    <h2 id="welcomeUser">
-        Welcome
-    </h2>
+    <div class="welcome-card">
 
-    <p>
-        Keep track and assist your study tasks
-    </p>
+        <h2 id="welcomeUser">
+            Welcome
+        </h2>
 
-</div>
-
-<div class="stats-grid">
-
-    <div class="stat-card">
-
-        <h2 id="totalTasks">0</h2>
-
-        <p>Total Tasks</p>
+        <p>
+            Keep track and assist your study tasks
+        </p>
 
     </div>
 
-    <div class="stat-card">
+    <div class="stats-grid">
 
-        <h2 id="pendingTasks">0</h2>
+        <div class="stat-card">
 
-        <p>Pending</p>
+            <h2 id="totalTasks">0</h2>
 
-    </div>
+            <p>Total Tasks</p>
 
-    <div class="stat-card">
+        </div>
 
-        <h2 id="completedTasks">0</h2>
+        <div class="stat-card">
 
-        <p>Completed</p>
+            <h2 id="pendingTasks">0</h2>
 
-    </div>
+            <p>Pending</p>
 
-</div>
+        </div>
 
-<div class="progress-section">
+        <div class="stat-card">
 
-    <h3>Progress</h3>
+            <h2 id="completedTasks">0</h2>
 
-    <div class="progress-bar">
-
-        <div
-            id="progressFill"
-            class="progress-fill">
+            <p>Completed</p>
 
         </div>
 
     </div>
 
-</div>
-    <p>
-        Keep track and assist your study tasks
-    </p>
-<div class="welcome-card">
+    <div class="progress-section">
 
-    <h3>
-        Welcome to StudoTask
-    </h3>
+        <h3>Progress</h3>
 
-    <p>
-        Manage your assignments,
-        deadlines and academic
-        activities efficiently.
-    </p>
+        <div class="progress-bar">
 
-</div>
+            <div
+                id="progressFill"
+                class="progress-fill">
+
+            </div>
+
+        </div>
+
+    </div>
+
     <div class="dashboard-buttons">
 
+        <!-- BUG FIX: Task Manager button was missing its closing </button> tag -->
         <button
             class="btn"
             onclick="location.href='taskmanager.html'">
-
-    Task Manager
+            Task Manager
+        </button>
 
         <button
             class="btn"
             onclick="location.href='calendar.html'">
-
-    Calendar
-
+            Calendar
         </button>
 
         <button
             class="btn"
             onclick="location.href='features.html'">
-
-    Features
+            Features
         </button>
-        
+
         <button
             class="btn btn-secondary"
             onclick="logout()">
-
-    Logout
-
+            Logout
         </button>
+
+    </div>
+
 </div>
+
+<script src="js/dashboard.js"></script>
 
 </body>
 </html>

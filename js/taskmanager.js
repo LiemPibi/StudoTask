@@ -10,25 +10,56 @@ document.getElementById(
     "taskBody"
 );
 
-if(tasks.length === 0){
+// BUG FIX: renderTasks was never defined; bare `return` at top-level
+// caused a syntax error. Wrapped logic inside the function.
+function renderTasks() {
 
-    taskBody.innerHTML =
+    taskBody.innerHTML = "";
 
-    `
-    <tr>
+    if (tasks.length === 0) {
 
-        <td colspan="3">
+        taskBody.innerHTML =
 
-            No task available.
+        `
+        <tr>
 
-            Click + to add task.
+            <td colspan="3">
 
+                No task available.
+
+                Click + to add task.
+
+            </td>
+
+        </tr>
+        `;
+
+        return;
+
+    }
+
+    tasks.forEach(task => {
+
+        const row =
+        document.createElement("tr");
+
+        row.innerHTML =
+
+        `
+        <td>${task.title}</td>
+
+        <td>${task.deadline}</td>
+
+        <td>
+            <span class="tag ${task.urgency.toLowerCase()}">
+                ${task.urgency}
+            </span>
         </td>
+        `;
 
-    </tr>
-    `;
+        taskBody.appendChild(row);
 
-    return;
+    });
 
 }
 

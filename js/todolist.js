@@ -227,14 +227,16 @@ function deleteTask(id) {
 
 }
 
-// CHECKLIST
+// CHECKLIST — BUG FIX: was broken, now correctly toggles completed
 function toggleTask(id) {
 
-    const task =
-    task.completed =
-    tasks[index].completed;
+    const index =
+    tasks.findIndex(
+        t => t.id == id
+    );
 
-    tasks[index] = task;
+    tasks[index].completed =
+    !tasks[index].completed;
 
     saveStorage();
 

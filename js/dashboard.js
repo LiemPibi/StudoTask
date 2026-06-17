@@ -1,13 +1,9 @@
-// Ambil user yang login
-
 const user =
 JSON.parse(
     localStorage.getItem(
         "studoUser"
     )
 );
-
-// Welcome Text
 
 if(user){
 
@@ -19,16 +15,12 @@ if(user){
 
 }
 
-// Ambil semua task
-
 const tasks =
 JSON.parse(
     localStorage.getItem(
         "tasks"
     )
 ) || [];
-
-// Statistik
 
 const totalTasks =
 tasks.length;
@@ -40,8 +32,6 @@ tasks.filter(
 
 const pendingTasks =
 totalTasks - completedTasks;
-
-// Update UI
 
 document.getElementById(
     "totalTasks"
@@ -57,8 +47,6 @@ document.getElementById(
     "pendingTasks"
 ).innerText =
 pendingTasks;
-
-// Progress
 
 let progress = 0;
 
@@ -77,7 +65,6 @@ document.getElementById(
 ).style.width =
 progress + "%";
 
-//tombol logout
 function logout(){
 
     localStorage.removeItem(
@@ -89,7 +76,6 @@ function logout(){
 
 }
 
-// Load Dashboard Data
 function loadDashboard(){
 
     const tasks =
