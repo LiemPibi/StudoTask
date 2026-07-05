@@ -113,7 +113,6 @@ function renderCalendar(){
         </div>`;
 
         const taskList =
-
         tasks.filter(
             task =>
             task.deadline ===
@@ -125,12 +124,8 @@ function renderCalendar(){
 
                 html +=
 
-                `<div class=
-                "deadline-tag
-                ${task.urgency.toLowerCase()}-color">
-
+                `<div class="deadline-tag ${task.urgency.toLowerCase()}-color">
                 ${task.title}
-
                 </div>`;
 
             }
@@ -160,7 +155,6 @@ function renderCalendar(){
 function showDetails(date){
 
     const dateTasks =
-
     tasks.filter(
         task =>
         task.deadline === date

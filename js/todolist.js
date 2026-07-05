@@ -73,10 +73,15 @@ function saveTask() {
             t => t.id == id
         );
 
-        task.completed =
-        tasks[index].completed;
+        // keep existing completion status when editing
+        if (index !== -1) {
 
-        tasks[index] = task;
+            task.completed =
+            tasks[index].completed;
+
+            tasks[index] = task;
+
+        }
 
     } else {
 
