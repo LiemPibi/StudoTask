@@ -279,7 +279,7 @@ document
     "change",
     function () {
 
-        const value = this.value;
+        const {value} = this;
 
         if (value === "title") {
 
