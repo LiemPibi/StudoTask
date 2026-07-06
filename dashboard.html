@@ -70,7 +70,6 @@
 
     <div class="dashboard-buttons">
 
-        <!-- BUG FIX: Task Manager button was missing its closing </button> tag -->
         <button
             class="btn"
             onclick="location.href='taskmanager.html'">
@@ -91,14 +90,59 @@
 
         <button
             class="btn btn-secondary"
+            onclick="openProfile()">
+            Profile
+        </button>
+
+        <button
+            class="btn btn-secondary"
             onclick="logout()">
             Logout
         </button>
 
     </div>
 
+    <div id="profileModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,.35); justify-content:center; align-items:center;">
+
+        <div class="card" style="max-width:520px; width:calc(100% - 40px);">
+
+            <h2 style="text-align:center; margin-bottom:18px;">Profile</h2>
+
+            <form id="profileForm" onsubmit="return saveProfile(event)">
+
+                <div class="form-group">
+
+                    <label>Username</label>
+
+                    <input type="text" id="profileUsername" required>
+
+                </div>
+
+                <div class="form-group">
+
+                    <label>New Password</label>
+
+                    <input type="password" id="profilePassword" required>
+
+                </div>
+
+                <div class="button-group" style="margin-top:8px;">
+
+                    <button class="btn" type="submit">Save</button>
+
+                    <button class="btn btn-secondary" type="button" onclick="closeProfile()">Cancel</button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
 </div>
 
+<script src="js/profile.js"></script>
 <script src="js/dashboard.js"></script>
 
 </body>

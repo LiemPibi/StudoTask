@@ -65,6 +65,10 @@ Background: #FFFFFF
 3. Open index.html.
 4. Run with Live Server.
 
+## Admin Account (Demo)
+- Email/Username: admin@studotask.app
+- Password: password
+
 ## Author
 
 StudoTask MVP Project
