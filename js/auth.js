@@ -1,3 +1,21 @@
+// Ensure dummy admin exists (so you can try without signing up)
+(function ensureDummyAdmin() {
+    try {
+        const existingRaw = localStorage.getItem("studoUser");
+        if (existingRaw) return;
+
+        const dummyAdmin = {
+            username: "admin",
+            email: "admin@studotask.app",
+            password: "password",
+        };
+
+        localStorage.setItem("studoUser", JSON.stringify(dummyAdmin));
+    } catch (err) {
+        // ignore
+    }
+})();
+
 // SIGN IN
 
 const signupForm =
@@ -54,7 +72,7 @@ if(loginForm){
 
             e.preventDefault();
 
-            const username =
+            const usernameOrEmail =
             document.getElementById(
                 "loginUsername"
             ).value;
@@ -73,12 +91,11 @@ if(loginForm){
 
             if(
                 user &&
-                user.username === username &&
+                (user.username === usernameOrEmail || user.email === usernameOrEmail) &&
                 user.password === password
         ){
 
-            // BUG FIX: was saving to "currentUser" but dashboard.js
-            // reads "studoUser", so welcome name never appeared.
+            // Save user (dashboard reads "studoUser")
             localStorage.setItem(
                 "studoUser",
                 JSON.stringify(user)
